@@ -41,7 +41,7 @@ var Photo = {
 		},
 
 		calcScore: function() {
-			return this.rating_ups / (this.rating_ups + this.rating_downs);
+			return Photo.calcScore(this);
 		},
 
 		toJSON: function() {
@@ -52,18 +52,10 @@ var Photo = {
 			return obj;
 		}
 
+	},
 
-//		calculateScore: function () {
-//			this.score = _.reduceRight(this.votes, function (sum, next) {
-//				return sum + next.value;
-//			}, 0);
-//			return this.score;
-//		},
-//
-//		url: function() {
-//			return 'http://stiikr.com/post/' + this.id;
-//		}
-
+	calcScore: function(photo) {
+		return photo.rating_ups / (photo.rating_ups + photo.rating_downs);
 	}
 
 };
