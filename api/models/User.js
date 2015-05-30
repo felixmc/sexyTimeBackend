@@ -21,8 +21,8 @@ var UserModel = {
 		},
 
 		calcScore: function() {
-			console.dir(this.photos[0]);
-			return this.photos.length ? _.reduce(this.photos, function(total, p) { return total + Photo.calcScore(p) }) / this.photos.length : 0;
+			console.log(this.photos.length);
+			return this.photos.length ? _.reduce(this.photos, function(total, p) { return total + Photo.calcScore(p) }, 0) / this.photos.length : 0;
 		},
 
 		toJSON: function() {
