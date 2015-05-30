@@ -33,9 +33,9 @@ module.exports.routes = {
 	***************************************************************************/
 
 	'/': 'MainController',
-	'/api/user': 'UserController',
-	'/api/photo': 'PhotoController',
-	'/api/rating': 'RatingController'
+	'/api/user':   {model: 'user'},
+	'/api/photo':  {model: 'photo'},
+	'/api/rating': {model: 'rating'}
 
 	/***************************************************************************
 	*                                                                          *
