@@ -21,9 +21,25 @@ var UserModel = {
 		},
 
 		calcScore: function() {
-			console.log(this.photos.length);
 			return this.photos.length ? _.reduce(this.photos, function(total, p) { return total + Photo.calcScore(p) }, 0) / this.photos.length : 0;
 		},
+
+		findNewRating: function(cb) {
+			// get all photo ids from my ratings
+			// find photo that is not in that set of photo ids
+
+			Rating.find({ author: this.id }, function(err, ratings) {
+				if (err) sails.log.error(err);
+				var ratedPhotos = _.map(ratings, function(rating) {
+					return rating.photo;
+				});
+
+				Photo.findOne({ id: { '!': ratedPhotos } }), function(err, photo) {
+					if (err) sails.log.error(err);
+					cb(photo);
+				};
+			});
+		}
 
 		toJSON: function() {
 			var obj = this.toObject();
@@ -50,10 +66,6 @@ var UserModel = {
 			if (user && user.validPassword(password)) cb(user)
 			else cb()
 		});
-	},
-
-	findNewRating: function() {
-
 	}
 };
 
