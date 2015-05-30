@@ -52,7 +52,7 @@ var Photo = {
 			obj.score = this.score();
 
 			return obj;
-		},
+		}
 
 
 //		calculateScore: function () {
