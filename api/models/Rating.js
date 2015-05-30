@@ -10,11 +10,13 @@ var Rating = {
 		},
 
 		author: {
-			model: 'User'
+			model: 'User',
+			required: true
 		},
 
 		photo: {
-			model: 'Photo'
+			model: 'Photo',
+			required: true
 		}
 
 	}
