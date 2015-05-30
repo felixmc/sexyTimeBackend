@@ -10,7 +10,7 @@ var Photo = {
 			required: false
 		},
 
-		author: {
+		owner: {
 			model: 'User',
 			required: true
 		},
