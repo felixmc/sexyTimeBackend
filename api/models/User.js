@@ -7,7 +7,7 @@ var User = {
 	attributes: {
 		username      : { type: 'string', unique: true, required: true },
 		email         : { type: 'string', unique: true, required: true },
-		password      : { type: 'string' },
+		password      : { type: 'string', minLength: 8, required: true },
 		rating_average: { type: 'float', defaultsTo: 0 },
 		gender        : { type: 'string', enum: ['m', 'f'], required: true },
 		wants_gender  : { type: 'array', enum: ['m', 'f'], required: true },
@@ -20,6 +20,11 @@ var User = {
 		validPassword : function(password) {
 			return bcrypt.compareSync(password, this.password);
 		}
+	},
+
+	beforeCreate: function(value, cb) {
+		value.password = User.generateHash(value.password);
+		cb();
 	},
 
 	generateHash: function() {
