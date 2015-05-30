@@ -1,5 +1,5 @@
 // Post Entity
-var Post = {
+var Photo = {
 	connection: 'mongo',
 	schema: true,
 
@@ -55,4 +55,4 @@ var Post = {
 
 };
 
-module.exports = Post;
+module.exports = Photo;

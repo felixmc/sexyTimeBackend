@@ -5,8 +5,9 @@ var Rating = {
 	attributes: {
 		value: {
 			type: 'integer',
-			required: true,
-			enum: [-1, 1]
+			required: true
+//			,
+//			enum: [-1, 1]
 		},
 
 		author: {
