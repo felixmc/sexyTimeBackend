@@ -23,14 +23,20 @@ var Rating = {
 		console.log(rating.photo);
 
 
-		if (rating.value == 1)
-			rating.photo.rating_ups++;
-		else
-			rating.photo.rating_downs++;
 
-		Photo.update(rating.photo.id, rating.photo, function(err, photo) {
+		Photo.findOne(rating.photo, function(err, photo) {
 			if (err) sails.log.error(err);
-			cb();
+			if (photo) {
+				if (rating.value == 1)
+					photo.rating_ups++;
+				else
+					photo.rating_downs++;
+
+				Photo.update(photo.id, photo, function(err, updated) {
+					if (err) sails.log.error(err);
+					cb();
+				});
+			}
 		});
 	}
 
