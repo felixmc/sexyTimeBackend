@@ -14,8 +14,8 @@ var User = {
 		last_login    : { type: 'datetime' },
 		score_private : { type: 'boolean' },
 		isNsfw        : { type: 'boolean', required: true },
-		photos        : { collection: 'Photo', via: 'owner' },
-		ratings       : { collection: 'Rating', via: 'author' },
+//		photos        : { collection: 'Photo', via: 'owner' },
+//		ratings       : { collection: 'Rating', via: 'author' },
 
 		validPassword : function(password) {
 			return bcrypt.compareSync(password, this.password);
