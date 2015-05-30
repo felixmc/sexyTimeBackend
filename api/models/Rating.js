@@ -20,6 +20,9 @@ var Rating = {
 	},
 
 	afterCreate: function(rating, cb) {
+		console.log(rating.photo);
+
+
 		if (rating.value == 1)
 			rating.photo.rating_ups++;
 		else
