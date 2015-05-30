@@ -48,7 +48,7 @@ var Photo = {
 			var obj = this.toObject();
 
 			obj.score = this.calcScore();
-			obj.url = 'http://sexytime.felixmilea.com/image/' + this.id + '.png';
+			obj.url   = 'http://sexytime.felixmilea.com/image/' + this.id + '.png';
 
 			return obj;
 		}

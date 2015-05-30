@@ -39,7 +39,7 @@ var UserModel = {
 					cb(photo);
 				};
 			});
-		}
+		},
 
 		toJSON: function() {
 			var obj = this.toObject();
