@@ -31,14 +31,12 @@ var Photo = {
 		},
 
 		rating_ups: {
-			type: 'int',
-			required: false,
+			type: 'integer',
 			defaultsTo: 0
 		},
 
 		rating_downs: {
-			type: 'int',
-			required: false,
+			type: 'integer',
 			defaultsTo: 0
 		},
 
