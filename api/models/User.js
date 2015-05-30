@@ -40,6 +40,7 @@ var UserModel = {
 	authenticate: function(username, password, cb) {
 		User.find({ username: username }, function(err, user) {
 			if (err) sails.log.error(err);
+			console.log(user);
 			if (user && user.validPassword(password)) cb(true)
 			else cb(false)
 		});
