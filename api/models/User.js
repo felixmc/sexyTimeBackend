@@ -8,7 +8,6 @@ var UserModel = {
 		username      : { type: 'string', unique: true, required: true },
 //		email         : { type: 'string', unique: true, required: true },
 		password      : { type: 'string', minLength: 8, required: true },
-		rating_average: { type: 'float', defaultsTo: 0 },
 		gender        : { type: 'string', enum: ['m', 'f'], required: true },
 		wants_gender  : { type: 'array', enum: ['m', 'f'], required: true },
 		last_login    : { type: 'datetime' },
@@ -21,9 +20,16 @@ var UserModel = {
 			return bcrypt.compareSync(password, this.password);
 		},
 
+		score: function() {
+			return this.photos.length ? _.(this.photos, function(total, p) { return total + p.score }) / this.photos.length : 0;
+		},
+
 		toJSON: function() {
 			var obj = this.toObject();
 			delete obj.password;
+
+			obj.score = this.score();
+
 			return obj;
 		},
 	},
