@@ -20,7 +20,7 @@ var UserModel = {
 			return bcrypt.compareSync(password, this.password);
 		},
 
-		score: function() {
+		calcScore: function() {
 			return this.photos.length ? _.reduce(this.photos, function(total, p) { return total + p.score }) / this.photos.length : 0;
 		},
 
@@ -28,7 +28,7 @@ var UserModel = {
 			var obj = this.toObject();
 			delete obj.password;
 
-			obj.score = this.score();
+			obj.score = this.calcScore();
 
 			return obj;
 		}

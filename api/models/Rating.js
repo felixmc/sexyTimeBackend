@@ -25,7 +25,10 @@ var Rating = {
 		else
 			rating.photo.rating_downs++;
 
-		Photo.update(rating.photo);
+		Photo.update(rating.photo.id, rating.photo, function(err, photo) {
+			if (err) sails.log.error(err);
+			cb();
+		});
 	}
 
 

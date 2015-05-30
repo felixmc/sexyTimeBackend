@@ -42,14 +42,14 @@ var Photo = {
 			defaultsTo: 0
 		},
 
-		score: function() {
+		calcScore: function() {
 			return this.rating_ups / (this.rating_ups + this.rating_downs);
 		},
 
 		toJSON: function() {
 			var obj = this.toObject();
 
-			obj.score = this.score();
+			obj.score = this.calcScore();
 
 			return obj;
 		}
