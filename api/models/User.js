@@ -33,7 +33,7 @@ var User = {
 		cb();
 	},
 
-	generateHash: function() {
+	generateHash: function(password) {
 		return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 	},
 
