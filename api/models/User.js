@@ -1,6 +1,6 @@
 var bcrypt   = require('bcrypt-nodejs');
 
-var User = {
+var UserModel = {
 	connection: 'mongo',
 	schema: true,
 
@@ -50,4 +50,4 @@ var User = {
 	}
 };
 
-module.exports = User;
+module.exports = UserModel;
