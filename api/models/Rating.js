@@ -25,8 +25,6 @@ var Rating = {
 		else
 			rating.photo.rating_downs++;
 
-		rating.photo.recalculate();
-
 		Photo.update(rating.photo);
 	}
 

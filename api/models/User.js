@@ -31,7 +31,7 @@ var UserModel = {
 			obj.score = this.score();
 
 			return obj;
-		},
+		}
 	},
 
 	beforeCreate: function(value, cb) {
