@@ -43,7 +43,7 @@ var Photo = {
 		},
 
 		score: function() {
-			this.score = this.rating_ups / (this.rating_ups + this.rating_downs);
+			return this.rating_ups / (this.rating_ups + this.rating_downs);
 		},
 
 		toJSON: function() {
