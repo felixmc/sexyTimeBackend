@@ -34,10 +34,7 @@ var UserModel = {
 					return rating.photo;
 				});
 
-				Photo.findOne({ id: { '!': ratedPhotos } }), function(err, photo) {
-					if (err) sails.log.error(err);
-					cb(photo);
-				};
+				Photo.findOne({ id: { '!': ratedPhotos } }, cb);
 			});
 		},
 

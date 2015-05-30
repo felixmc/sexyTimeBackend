@@ -25,7 +25,29 @@ var MainController = {
 		res.end('success');
 	},
 	rate: function(req, res) {
-		Photo.findOne();
+		if (req.session.user) {
+			User.findOne(req.session.user.id, function(err, user) {
+				if (err) {
+					sails.log.error(err);
+					res.json(err);
+				} else if (user) {
+					user.findNewRating(function(err, photo) {
+						if (err) {
+							sails.log.error(err);
+							res.json(err);
+						} else if (photo) {
+							res.json(photo);
+						} else {
+							res.json({ error: "Nothing left to rate :(" });
+						}
+					});
+				} else {
+					res.json({ error: "You need to be logged in?" });
+				}
+			});
+		} else {
+			res.json({ error: "You need to be logged in." });
+		}
 	}
 };
 
