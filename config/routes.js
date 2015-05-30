@@ -32,10 +32,7 @@ module.exports.routes = {
 	*                                                                          *
 	***************************************************************************/
 
-	'/': 'MainController',
-	'/api/user':   {model: 'user'},
-	'/api/photo':  {model: 'photo'},
-	'/api/rating': {model: 'rating'}
+	'/': 'MainController'
 
 	/***************************************************************************
 	*                                                                          *
