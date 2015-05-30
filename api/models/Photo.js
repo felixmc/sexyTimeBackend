@@ -34,10 +34,6 @@ var Photo = {
 		isPrivate: {
 			type: 'boolean',
 			required: false
-		},
-
-		dateCreated: {
-			type: 'datetime'
 		}
 
 //		calculateScore: function () {

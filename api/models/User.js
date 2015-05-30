@@ -10,7 +10,6 @@ var User = {
 		rating_average: { type: 'float', defaultsTo: 0 },
 		gender        : { type: 'string', enum: ['m', 'f'], required: true },
 		wants_gender  : { type: 'array', enum: ['m', 'f'], required: true }//,
-//		date_created  : { type: 'datetime' },
 //		last_login    : { type: 'datetime' },
 //		score_private : { type: 'boolean' },
 //		isNsfw        : { type: 'boolean', required: true },
