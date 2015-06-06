@@ -20,16 +20,6 @@ var Photo = {
 			via: 'photo'
 		},
 
-		isNsfw: {
-			type: 'boolean',
-			required: true
-		},
-
-		isPrivate: {
-			type: 'boolean',
-			required: false
-		},
-
 		url: {
 			type: 'string',
 			required: true

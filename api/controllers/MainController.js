@@ -7,22 +7,24 @@ var MainController = {
 	status: function(req, res) {
 		res.end( 'You are ' + (req.session.user ? 'logged in as ' + req.session.user.username + '.' : 'not logged in.') );
 	},
-	login: function(req, res) {
-		var data = req.body || {};
-		User.authenticate(data.username, data.password, function(user) {
-			if (user) {
-				req.session.user = {
-					id: user.id,
-					username: user.username
-				};
-			}
+	upload: function(req, res) {
+		if (req.session.user) {
+			var photoData = req.body;
+			photoData.owner = req.session.user.id;
 
-			res.end('login success: ' + (!!user));
-		});
-	},
-	logout: function(req, res) {
-		req.session.destroy();
-		res.end('success');
+			Photo.create(photoData)
+				.exec(function(err, photo) {
+					if (err) {
+						return res.serverError(err);
+					} else if (photo) {
+						return res.json(photo);
+					} else {
+						return res.badRequest();
+					}
+				});
+		} else {
+			res.forbidden();
+		}
 	},
 	rate: function(req, res) {
 		if (req.session.user) {
@@ -46,7 +48,7 @@ var MainController = {
 				}
 			});
 		} else {
-			res.json({ error: "You need to be logged in." });
+			res.forbidden();
 		}
 	}
 };
