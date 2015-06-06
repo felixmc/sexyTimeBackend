@@ -30,6 +30,11 @@ var Photo = {
 			required: false
 		},
 
+		url: {
+			type: 'string',
+			required: true
+		},
+
 		rating_ups: {
 			type: 'integer',
 			defaultsTo: 0
@@ -53,6 +58,19 @@ var Photo = {
 			return obj;
 		}
 
+	},
+
+	beforeCreate: function(value, cb) {
+		sails.log.debug(value);
+
+		sails.log.debug();
+
+		sails.hooks.s3.saveImage(value.url, , function(err, data) {
+			if (err) sails.log.error(err);
+			sails.log.debug(data);
+
+			cb();
+		});
 	},
 
 	calcScore: function(photo) {
