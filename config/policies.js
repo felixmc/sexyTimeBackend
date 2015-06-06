@@ -26,10 +26,11 @@ module.exports.policies = {
 	*                                                                          *
 	***************************************************************************/
 
-	'*': true
-	//,
+	'*': 'sessionAuth',
 
-	//'/api/': 'sessionAuth'
+	'/': true,
+
+	'/auth/': true
 
 //	'*': 'sessionAuth',
 //
