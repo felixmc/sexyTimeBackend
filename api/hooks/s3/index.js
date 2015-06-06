@@ -17,7 +17,7 @@ module.exports = function(sails) {
 		},
 
 		saveImage: function saveImage(rawData, photoId, cb) {
-			var buffer = new Buffer(rawData.replace(/^data:image\/\w+;base64,/, ''),'base64');
+			var buffer = new Buffer(rawData,'base64');
 
 			var data = {
 				Key: photoId,
