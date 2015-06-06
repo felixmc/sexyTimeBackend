@@ -34,9 +34,9 @@ module.exports.routes = {
 
 	'/': 'MainController.index',
 
-	'/photo/': 'PhotoController',
+	//'/photo/': 'PhotoController',
 
-	'/auth/': 'AuthController'
+	//'/auth/': 'AuthController'
 
 //	'/auth/': 'AuthController',
 //
