@@ -7,7 +7,7 @@ var AuthController = {
 	me: function(req, res) {
 		if (req.session.user) {
 			User.find(req.session.user.id)
-			.done(function(err, user) {
+			.exec(function(err, user) {
 				if (err) {
 					return res.send(err);
 				} else {
@@ -27,7 +27,6 @@ var AuthController = {
 					return res.send(err);
 				} else if (user) {
 					req.session.user = user.toMinJSON();
-					sails.log.debug(user);
 					return res.json(user.toJSON(true));
 				} else {
 					return res.badRequest();
