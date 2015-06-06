@@ -7,6 +7,8 @@ module.exports = function(sails) {
 	return {
 
 		configure: function configure() {
+			console.log(sails.config.aws);
+
 			AWS.config.update(sails.config.aws);
 		},
 
