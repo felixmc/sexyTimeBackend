@@ -25,9 +25,11 @@ var AuthController = {
 			.exec(function(err, user) {
 				if (user) {
 					return res.send(err);
-				} else {
+				} else if (user) {
 					req.session.user = user.toMinJSON();
 					return res.json(user.toJSON(true));
+				} else {
+					return res.badRequest();
 				}
 			});
 	},
