@@ -10,8 +10,10 @@ var AuthController = {
 			.exec(function(err, user) {
 				if (err) {
 					return res.send(err);
-				} else {
+				} else if (user) {
 					return res.json(user.toMinJSON());
+				} else {
+					return res.badRequest();
 				}
 			});
 		} else {
