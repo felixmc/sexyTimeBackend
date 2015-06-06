@@ -60,7 +60,7 @@ var UserModel = {
 
 	generateSecret: function() {
 		var result = '';
-		for (var i = secret.length; i > 0; --i) result += secret.chars[Math.round(Math.random() * (chars.length - 1))];
+		for (var i = secret.length; i > 0; --i) result += secret.chars[Math.round(Math.random() * (secret.chars.length - 1))];
 		return result;
 	},
 
