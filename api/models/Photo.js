@@ -65,7 +65,7 @@ var Photo = {
 
 		sails.log.debug();
 
-		sails.hooks.s3.saveImage(value.url, , function(err, data) {
+		sails.hooks.s3.saveImage(value.url, 'randid', function(err, data) {
 			if (err) sails.log.error(err);
 			sails.log.debug(data);
 
