@@ -30,10 +30,10 @@ module.exports.policies = {
 
 	'/auth/': true,
 
-	'*': 'sessionAuth'
-
-
-
+	'/main/': 'sessionAuth',
+	'/user/': 'sessionAuth',
+	'/photo/': 'sessionAuth',
+	'/rating/': 'sessionAuth'
 //	'*': 'sessionAuth',
 //
 //	'MainController': true
