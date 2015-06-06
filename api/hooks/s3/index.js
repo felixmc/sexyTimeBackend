@@ -11,7 +11,7 @@ module.exports = function(sails) {
 		},
 
 		initialize: function initialize(cb) {
-			var bucket = new AWS.S3( { params: { Bucket: sails.config.s3.bucket } } );
+			bucket = new AWS.S3( { params: { Bucket: sails.config.s3.bucket } } );
 
 			return cb();
 		},
