@@ -2,7 +2,7 @@
 
 var MainController = {
 	index: function(req, res) {
-
+		return res.send('Welcome to SexyTime v0.1');
 	},
 	status: function(req, res) {
 		res.end( 'You are ' + (req.session.user ? 'logged in as ' + req.session.user.username + '.' : 'not logged in.') );
