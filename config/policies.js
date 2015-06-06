@@ -26,14 +26,14 @@ module.exports.policies = {
 	*                                                                          *
 	***************************************************************************/
 
-		'/': true,
+	'/': 'default',
 
-	'/auth/': true,
+	'/auth/': 'default',
 
-	'/main/': 'sessionAuth',
-	'/user/': 'sessionAuth',
-	'/photo/': 'sessionAuth',
-	'/rating/': 'sessionAuth'
+	'/main/':   ['default', 'sessionAuth'],
+	'/user/':   ['default', 'sessionAuth'],
+	'/photo/':  ['default', 'sessionAuth'],
+	'/rating/': ['default', 'sessionAuth']
 //	'*': 'sessionAuth',
 //
 //	'MainController': true
