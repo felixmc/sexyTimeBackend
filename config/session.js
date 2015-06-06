@@ -21,7 +21,7 @@ module.exports.session = {
 	* of your users, forcing them to log in again.                             *
 	*                                                                          *
 	***************************************************************************/
-	secret: '2967bdf25356fec709815cec48c82ff0',
+	secret: '2967bdf25356f09709815cec48c82ff0',
 
 	adapter: 'mongo',
 	host: 'localhost',
