@@ -37,13 +37,17 @@ var AuthController = {
 	},
 	login: function(req, res) {
 		var data = req.body || {};
-		User.authenticate(data.userId, data.secret, function(user) {
-			if (user) {
-				req.session.user = user.toMinJSON();
-			}
+		if (data.userId && data.secret) {
+			User.authenticate(data.userId, data.secret, function(user) {
+				if (user) {
+					req.session.user = user.toMinJSON();
+				}
 
-			return res.json({ status: !!user });
-		});
+				return res.json({ status: !!user });
+			});
+		} else {
+			return res.badRequest();
+		}
 	},
 	logout: function(req, res) {
 		req.session.destroy();
