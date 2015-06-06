@@ -1,3 +1,5 @@
+var md5 = require('MD5');
+
 // Post Entity
 var Photo = {
 	connection: 'mongo',
@@ -51,11 +53,9 @@ var Photo = {
 	},
 
 	beforeCreate: function(value, cb) {
-		sails.log.debug(value);
+		var key = value.owner + '/' + md5(value.url);
 
-		sails.log.debug();
-
-		sails.hooks.s3.saveImage(value.url, '', function(err, data) {
+		sails.hooks.s3.saveImage(value.url, key, function(err, data) {
 			if (err) sails.log.error(err);
 			sails.log.debug(data);
 

@@ -5,6 +5,7 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
+    "MD5": "^1.2.2",
     "aws-sdk": "^2.1.33",
     "bcrypt-nodejs": "0.0.3",
     "connect-mongo": "^0.8.1",
