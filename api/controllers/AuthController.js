@@ -6,7 +6,7 @@ var AuthController = {
 	},
 	me: function(req, res) {
 		if (req.session.user) {
-			User.find(req.session.user.id)
+			User.findOne(req.session.user.id)
 			.exec(function(err, user) {
 				if (err) {
 					return res.send(err);
