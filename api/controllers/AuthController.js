@@ -1,7 +1,7 @@
 'use strict';
 
 var AuthController = {
-	status: function(req, res) {
+	index: function(req, res) {
 		return res.json({ isAuth: !!(req.session.user) });
 	},
 	me: function(req, res) {
