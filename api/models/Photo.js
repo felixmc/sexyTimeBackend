@@ -45,7 +45,6 @@ var Photo = {
 			var obj = this.toObject();
 
 			obj.score = this.calcScore();
-			obj.url   = 'http://sexytime.felixmilea.com/image/' + this.id + '.png';
 
 			return obj;
 		}
@@ -57,7 +56,8 @@ var Photo = {
 
 		sails.hooks.s3.saveImage(value.url, key, function(err, data) {
 			if (err) sails.log.error(err);
-			sails.log.debug(data);
+
+			value.url = 'https://s3.amazonaws.com/sexytime.felixmilea.com/' + key;
 
 			cb();
 		});
