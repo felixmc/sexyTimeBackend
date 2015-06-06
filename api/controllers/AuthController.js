@@ -27,7 +27,7 @@ var AuthController = {
 					return res.send(err);
 				} else if (user) {
 					req.session.user = user.toMinJSON();
-					console.log(user);
+					sails.log.debug(user);
 					return res.json(user.toJSON(true));
 				} else {
 					return res.badRequest();
