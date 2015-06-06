@@ -27,6 +27,7 @@ var AuthController = {
 					return res.send(err);
 				} else if (user) {
 					req.session.user = user.toMinJSON();
+					console.log(user);
 					return res.json(user.toJSON(true));
 				} else {
 					return res.badRequest();
