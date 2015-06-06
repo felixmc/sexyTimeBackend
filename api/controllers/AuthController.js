@@ -23,7 +23,7 @@ var AuthController = {
 
 		User.create(userData)
 			.exec(function(err, user) {
-				if (user) {
+				if (err) {
 					return res.send(err);
 				} else if (user) {
 					req.session.user = user.toMinJSON();
