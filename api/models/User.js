@@ -1,24 +1,22 @@
 var bcrypt   = require('bcrypt-nodejs');
 
+var secret = {
+	length: 32,
+	chars: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+};
+
 var UserModel = {
 	connection: 'mongo',
 	schema: true,
 
 	attributes: {
-		username      : { type: 'string', unique: true, required: true },
-//		email         : { type: 'string', unique: true, required: true },
-		password      : { type: 'string', minLength: 8, required: true },
-		gender        : { type: 'string', enum: ['m', 'f'], required: true },
-		wants_gender  : { type: 'array', enum: ['m', 'f'], required: true },
-		last_login    : { type: 'datetime' },
-		score_private : { type: 'boolean' },
-		isNsfw        : { type: 'boolean', required: true },
-		photos        : { collection: 'Photo', via: 'owner' },
-		ratings       : { collection: 'Rating', via: 'author' },
-
-		validPassword : function(password) {
-			return bcrypt.compareSync(password, this.password);
-		},
+		secret            : { type: 'string' },
+		gender            : { type: 'string', enum: ['m', 'f'], required: true },
+		gender_preference : { type: 'array', enum: ['m', 'f'], required: true },
+		last_login        : { type: 'datetime' },
+		private           : { type: 'boolean' },
+		photos            : { collection: 'Photo', via: 'owner' },
+		ratings           : { collection: 'Rating', via: 'author' },
 
 		calcScore: function() {
 			return this.photos.length ? _.reduce(this.photos, function(total, p) { return total + Photo.calcScore(p) }, 0) / this.photos.length : 0;
@@ -38,29 +36,43 @@ var UserModel = {
 			});
 		},
 
-		toJSON: function() {
+		toJSON: function(showSecret) {
 			var obj = this.toObject();
-			delete obj.password;
+
+			if (!showSecret)
+				delete obj.secret;
 
 			obj.score = this.calcScore();
+
+			return obj;
+		},
+
+		toMinJSON: function() {
+			var obj = this.toObject();
+
+			delete obj.photos;
+			delete obj.ratings;
+			delete obj.secret;
 
 			return obj;
 		}
 	},
 
+	generateSecret: function() {
+		var result = '';
+		for (var i = secret.length; i > 0; --i) result += secret.chars[Math.round(Math.random() * (chars.length - 1))];
+		return result;
+	},
+
 	beforeCreate: function(value, cb) {
-		value.password = User.generateHash(value.password);
+		value.secret = User.generateSecret();
 		cb();
 	},
 
-	generateHash: function(password) {
-		return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-	},
-
-	authenticate: function(username, password, cb) {
-		User.findOne({ username: username }, function(err, user) {
+	authenticate: function(userId, secret, cb) {
+		User.findOne(userId, function(err, user) {
 			if (err) sails.log.error(err);
-			if (user && user.validPassword(password)) cb(user)
+			if (user && user.secret && user.secret === secret) cb(user)
 			else cb()
 		});
 	}
