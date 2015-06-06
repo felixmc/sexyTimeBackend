@@ -22,14 +22,14 @@ var AuthController = {
 		var userData = req.body;
 
 		User.create(userData)
-		.done(function(err, user) {
-			if (user) {
-				return res.send(err);
-			} else {
-				req.session.user = user.toMinJSON();
-				return res.json(user.toJSON(true));
-			}
-		});
+			.exec(function(err, user) {
+				if (user) {
+					return res.send(err);
+				} else {
+					req.session.user = user.toMinJSON();
+					return res.json(user.toJSON(true));
+				}
+			});
 	},
 	login: function(req, res) {
 		var data = req.body || {};
