@@ -5,7 +5,6 @@ module.exports = function(sails) {
 	var bucket;
 
 	return {
-
 		configure: function configure() {
 			AWS.config.update(sails.config.aws);
 		},
@@ -28,7 +27,5 @@ module.exports = function(sails) {
 
 			bucket.putObject(data, cb);
 		}
-
-
 	};
 };
