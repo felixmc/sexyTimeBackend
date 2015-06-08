@@ -9,7 +9,7 @@ var AuthController = {
 			User.findOne(req.session.user.id)
 			.exec(function(err, user) {
 				if (err) {
-					return res.send(err);
+					return res.serverError(err);
 				} else if (user) {
 					return res.json(user.toMinJSON());
 				} else {
@@ -20,13 +20,36 @@ var AuthController = {
 			return res.forbidden();
 		}
 	},
+	update: function(req, res) {
+
+		if (req.session.user) {
+			var userData = req.body;
+			var update = {};
+			if (userData.gender) update.gender = userData.gender;
+			if (userData.gender_preference) update.gender_preference = userData.gender_preference;
+
+			User.update(req.session.user.id, update)
+				.exec(function(err, users) {
+					if (err) {
+						return res.serverError(err);
+					} else if (users.length) {
+						req.session.user = users[0].toMinJSON();
+						return res.json(users[0].toJSON(true));
+					} else {
+						return res.badRequest();
+					}
+				});
+		} else {
+			return res.forbidden();
+		}
+	},
 	signup: function(req, res) {
 		var userData = req.body;
 
 		User.create(userData)
 			.exec(function(err, user) {
 				if (err) {
-					return res.send(err);
+					return res.serverError(err);
 				} else if (user) {
 					req.session.user = user.toMinJSON();
 					return res.json(user.toJSON(true));
