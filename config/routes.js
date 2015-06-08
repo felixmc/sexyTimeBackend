@@ -22,7 +22,7 @@
 
 module.exports.routes = {
 
-	'/*': function(req, res, next) { sails.log.debug(req.method, req.url); next(); },
+	'/*': function(req, res, next) { sails.log.debug(req.method, req.url, req.body); next(); },
 	/***************************************************************************
 	*                                                                          *
 	* Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
