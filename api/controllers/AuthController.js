@@ -25,7 +25,7 @@ var AuthController = {
 		if (req.session.user) {
 			var userData = req.body;
 			var update = {};
-			if (userData.gender) update.gender = userData.gender;
+			// don't allow change of gender
 			if (userData.gender_preference) update.gender_preference = userData.gender_preference;
 
 			User.update(req.session.user.id, update)

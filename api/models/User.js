@@ -75,8 +75,9 @@ var UserModel = {
 
 					Photo.findOne({
 						where: {
-							id:    { '!': ratedPhotos },
-							owner: { '!': userId }
+							id:     { '!': ratedPhotos },
+							owner:  { '!': userId },
+							gender: user.gender_preference
 						},
 						sort: {
 							rating_total: 'ASC',
