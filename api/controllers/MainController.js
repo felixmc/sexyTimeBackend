@@ -49,7 +49,7 @@ var MainController = {
 							sails.log.error(err);
 							return res.serverError(err);
 						} else {
-							Photo.find(rating.photo).exec(function(err, photo) {
+							Photo.findOne(rating.photo).exec(function(err, photo) {
 								if (err) {
 									sails.log.error(err);
 									return res.serverError(err);
