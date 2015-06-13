@@ -36,6 +36,9 @@ var Rating = {
 					if (err) sails.log.error(err);
 					cb();
 				});
+			} else {
+				sails.log.error('photo not found?? ', rating.photo);
+				cb();
 			}
 		});
 
