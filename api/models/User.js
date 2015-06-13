@@ -12,7 +12,7 @@ var UserModel = {
 	attributes: {
 		secret            : { type: 'string' },
 		gender            : { type: 'string', enum: ['m', 'f'], required: true },
-		gender_preference : { type: 'array', enum: ['m', 'f'], required: true },
+		gender_preference : { type: 'array',  enum: [ ['m'], ['f'], ['m', 'f'], ['f', 'm'] ], required: true },
 		last_login        : { type: 'datetime' },
 		private           : { type: 'boolean' },
 		photos            : { collection: 'Photo', via: 'owner' },
