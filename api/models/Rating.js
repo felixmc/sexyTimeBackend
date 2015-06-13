@@ -24,15 +24,15 @@ var Rating = {
 
 		Photo.findOne(rating.photo, function(err, photo) {
 			if (err) sails.log.error(err);
-			if (photo) {
+			else if (photo) {
 				if (rating.weight == 1)
-					this.rating_ups++;
+					photo.rating_ups++;
 				else
-					this.rating_downs++;
+					photo.rating_downs++;
 
-				this.rating_total++;
+				photo.rating_total++;
 
-				Photo.update(photo.id, photo, function(err, updated) {
+				photo.save(function(err, updated) {
 					if (err) sails.log.error(err);
 					cb();
 				});
