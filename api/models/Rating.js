@@ -20,7 +20,7 @@ var Rating = {
 	},
 
 	afterCreate: function(rating, cb) {
-		console.log(rating.photo);
+		sails.log.debug('rating photo ', rating.photo);
 
 		Photo.findOne(rating.photo, function(err, photo) {
 			if (err) sails.log.error(err);
