@@ -22,20 +22,6 @@ var UserModel = {
 			return this.photos.length ? _.reduce(this.photos, function(total, p) { return total + Photo.calcScore(p) }, 0) / this.photos.length : 0;
 		},
 
-		findNewRating: function(cb) {
-			// get all photo ids from my ratings
-			// find photo that is not in that set of photo ids
-
-			Rating.find({ author: this.id }, function(err, ratings) {
-				if (err) sails.log.error(err);
-				var ratedPhotos = _.map(ratings, function(rating) {
-					return rating.photo;
-				});
-
-				Photo.findOne({ id: { '!': ratedPhotos } }, cb);
-			});
-		},
-
 		toJSON: function(showSecret) {
 			var obj = this.toObject();
 
@@ -75,7 +61,35 @@ var UserModel = {
 			if (user && user.secret && user.secret === secret) cb(user)
 			else cb()
 		});
+	},
+
+	findPhotoToRate: function(userId, cb) {
+		User.findOne(userId, function(err, user) {
+			if (err) return cb(err);
+			else if (user) {
+				Rating.find({ author: userId }, function(err, ratings) {
+					if (err) return cb(err);
+					var ratedPhotos = _.map(ratings, function(rating) {
+						return rating.photo;
+					});
+
+					Photo.findOne({
+						where: {
+							id:    { '!': ratedPhotos },
+							owner: { '!': userId }
+						},
+						sort: {
+							rating_total: 'ASC',
+							createAt:     'ASC'
+						}
+					}, cb);
+				});
+			} else {
+				return cb(new Error('User not found.'));
+			}
+		});
 	}
+
 };
 
 module.exports = UserModel;

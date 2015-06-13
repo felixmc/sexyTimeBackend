@@ -37,6 +37,21 @@ var Photo = {
 			defaultsTo: 0
 		},
 
+		rating_total: {
+			type: 'integer',
+			defaultsTo: 0
+		},
+
+		addRating: function(rating) {
+			if (rating.value == 1) {
+				this.rating_ups++;
+			} else {
+				this.rating_downs++;
+			}
+
+			this.rating_total++;
+		},
+
 		calcScore: function() {
 			return Photo.calcScore(this);
 		},
@@ -64,7 +79,7 @@ var Photo = {
 	},
 
 	calcScore: function(photo) {
-		return photo.rating_ups / (photo.rating_ups + photo.rating_downs);
+		return photo.rating_ups / photo.rating_total;
 	}
 
 };
