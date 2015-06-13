@@ -42,16 +42,6 @@ var Photo = {
 			defaultsTo: 0
 		},
 
-		addRating: function(rating) {
-			if (rating.value == 1) {
-				this.rating_ups++;
-			} else {
-				this.rating_downs++;
-			}
-
-			this.rating_total++;
-		},
-
 		calcScore: function() {
 			return Photo.calcScore(this);
 		},

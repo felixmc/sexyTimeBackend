@@ -42,22 +42,14 @@ var MainController = {
 				});
 			} else if (req.method === 'POST') {
 				var data = req.body;
-				if (data.value && data.photo) {
-					sails.log.debug('raw data: ', { author: req.session.user.id, photo: data.photo, value: data.value });
-					Rating.create({ author: req.session.user.id, photo: data.photo, value: data.value }).exec(function(err, rating) {
+				if (data.weight && data.photo) {
+					sails.log.debug('raw data: ', { author: req.session.user.id, photo: data.photo, weight: data.weight });
+					Rating.create({ author: req.session.user.id, photo: data.photo, weight: data.weight }).exec(function(err, rating) {
 						if (err) {
 							sails.log.error(err);
 							return res.serverError(err);
 						} else {
-							rating.photo.addRating(rating);
-							rating.photo.save().exec(function(err, photo) {
-								if (err) {
-									sails.log.error(err);
-									return res.serverError(err);
-								} else {
-									return res.json(photo);
-								}
-							});
+							return res.json(rating.photo);
 						}
 					});
 				} else {

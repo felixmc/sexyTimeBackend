@@ -3,7 +3,7 @@ var Rating = {
 	schema: true,
 
 	attributes: {
-		value: {
+		weight: {
 			type: 'integer',
 			required: true
 		},
@@ -22,15 +22,15 @@ var Rating = {
 	afterCreate: function(rating, cb) {
 		console.log(rating.photo);
 
-
-
 		Photo.findOne(rating.photo, function(err, photo) {
 			if (err) sails.log.error(err);
 			if (photo) {
-				if (rating.value == 1)
-					photo.rating_ups++;
+				if (rating.weight == 1)
+					this.rating_ups++;
 				else
-					photo.rating_downs++;
+					this.rating_downs++;
+
+				this.rating_total++;
 
 				Photo.update(photo.id, photo, function(err, updated) {
 					if (err) sails.log.error(err);
@@ -38,8 +38,8 @@ var Rating = {
 				});
 			}
 		});
-	}
 
+	}
 
 };
 
