@@ -43,6 +43,7 @@ var MainController = {
 			} else if (req.method === 'POST') {
 				var data = req.body;
 				if (data.value && data.photo) {
+					sails.log.debug('raw data: ', { author: req.session.user.id, photo: data.photo, value: data.value });
 					Rating.create({ author: req.session.user.id, photo: data.photo, value: data.value }).exec(function(err, rating) {
 						if (err) {
 							sails.log.error(err);
