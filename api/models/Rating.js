@@ -34,12 +34,12 @@ var Rating = {
 
 				photo.save(function(err, updated) {
 					if (err) sails.log.error(err);
-					cb();
 				});
 			} else {
 				sails.log.error('photo not found?? ', rating.photo);
-				cb();
 			}
+
+			cb();
 		});
 
 	}
