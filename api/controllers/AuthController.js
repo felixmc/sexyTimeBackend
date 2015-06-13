@@ -21,7 +21,6 @@ var AuthController = {
 		}
 	},
 	update: function(req, res) {
-
 		if (req.session.user) {
 			var userData = req.body;
 			var update = {};

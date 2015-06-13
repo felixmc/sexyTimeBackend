@@ -19,7 +19,7 @@ var Rating = {
 		}
 	},
 
-	afterCreate: function(rating, cb) {
+	beforeCreate: function(rating, cb) {
 		sails.log.debug('rating photo ', rating.photo);
 
 		Photo.findOne(rating.photo, function(err, photo) {
