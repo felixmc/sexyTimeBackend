@@ -49,7 +49,14 @@ var MainController = {
 							sails.log.error(err);
 							return res.serverError(err);
 						} else {
-							return res.json(rating.photo);
+							Photo.find(rating.photo).exec(function(err, photo) {
+								if (err) {
+									sails.log.error(err);
+									return res.serverError(err);
+								} else {
+									return res.json(photo);
+								}
+							});
 						}
 					});
 				} else {
