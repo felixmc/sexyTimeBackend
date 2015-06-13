@@ -10,7 +10,8 @@ var MainController = {
 	upload: function(req, res) {
 		if (req.session.user) {
 			var photoData = req.body;
-			photoData.owner = req.session.user.id;
+			photoData.owner  = req.session.user.id;
+			photoData.gender = req.session.user.gender;
 
 			Photo.create(photoData)
 				.exec(function(err, photo) {

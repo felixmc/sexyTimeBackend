@@ -17,6 +17,12 @@ var Photo = {
 			required: true
 		},
 
+		gender: {
+			type: 'string',
+			enum: ['m', 'f'],
+			required: true
+		},
+
 		ratings: {
 			collection: 'Rating',
 			via: 'photo'
