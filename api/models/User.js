@@ -64,6 +64,7 @@ var UserModel = {
 	},
 
 	findPhotoToRate: function(userId, skip, cb) {
+		console.log('skip');
 		User.findOne(userId, function(err, user) {
 			if (err) return cb(err);
 			else if (user) {
