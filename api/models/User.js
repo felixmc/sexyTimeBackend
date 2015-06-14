@@ -63,7 +63,7 @@ var UserModel = {
 		});
 	},
 
-	findPhotoToRate: function(userId, skip, cb) {
+	findPhotoToRate: function(userId, cb) {
 		User.findOne(userId, function(err, user) {
 			if (err) return cb(err);
 			else if (user) {
@@ -73,7 +73,7 @@ var UserModel = {
 						return rating.photo;
 					});
 
-					Photo.findOne({
+					Photo.find({
 						where: {
 							id:     { '!': ratedPhotos },
 							owner:  { '!': userId },
@@ -83,7 +83,9 @@ var UserModel = {
 							rating_total: 'ASC',
 							createAt:     'ASC'
 						}
-					}).skip(skip).exec(cb);
+					})
+					.limit(5)
+					.exec(cb);
 				});
 			} else {
 				return cb(new Error('User not found.'));
