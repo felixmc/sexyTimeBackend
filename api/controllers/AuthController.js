@@ -63,9 +63,10 @@ var AuthController = {
 			User.authenticate(data.userId, data.secret, function(user) {
 				if (user) {
 					req.session.user = user.toMinJSON();
+					return res.json(req.session.user);
+				} else {
+					return res.badRequest();
 				}
-
-				return res.json({ status: !!user });
 			});
 		} else {
 			return res.badRequest();
