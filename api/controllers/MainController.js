@@ -29,7 +29,6 @@ var MainController = {
 		}
 	},
 	rate: function(req, res) {
-		console.log('query: ', req.query);
 		if (req.session.user) {
 			if (req.method === 'GET') {
 				console.log('skip? ', req.query.skip || 0);
@@ -46,7 +45,6 @@ var MainController = {
 			} else if (req.method === 'POST') {
 				var data = req.body;
 				if (data.weight && data.photo) {
-					sails.log.debug('raw data: ', { author: req.session.user.id, photo: data.photo, weight: data.weight });
 					Rating.create({ author: req.session.user.id, photo: data.photo, weight: data.weight }).exec(function(err, rating) {
 						if (err) {
 							sails.log.error(err);
