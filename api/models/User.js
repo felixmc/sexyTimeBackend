@@ -83,9 +83,8 @@ var UserModel = {
 						sort: {
 							rating_total: 'ASC',
 							createAt:     'ASC'
-						},
-						skip: skip
-					}, cb);
+						}
+					}).skip(0).exec(cb);
 				});
 			} else {
 				return cb(new Error('User not found.'));
