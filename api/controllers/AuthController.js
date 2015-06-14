@@ -2,6 +2,7 @@
 
 var AuthController = {
 	index: function(req, res) {
+		console.log( req.session );
 		return res.json({ isAuth: !!(req.session.user) });
 	},
 	me: function(req, res) {
