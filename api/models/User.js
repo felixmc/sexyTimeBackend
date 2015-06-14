@@ -63,7 +63,7 @@ var UserModel = {
 		});
 	},
 
-	findPhotoToRate: function(userId, cb) {
+	findPhotoToRate: function(userId, skip, cb) {
 		User.findOne(userId, function(err, user) {
 			if (err) return cb(err);
 			else if (user) {
@@ -82,7 +82,8 @@ var UserModel = {
 						sort: {
 							rating_total: 'ASC',
 							createAt:     'ASC'
-						}
+						},
+						skip: skip
 					}, cb);
 				});
 			} else {
