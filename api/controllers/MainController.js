@@ -29,6 +29,7 @@ var MainController = {
 		}
 	},
 	rate: function(req, res) {
+		console.log('query: ', req.query);
 		if (req.session.user) {
 			if (req.method === 'GET') {
 				User.findPhotoToRate(req.session.user.id, req.query.skip || 0, function(err, photo) {
