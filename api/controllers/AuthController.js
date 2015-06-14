@@ -65,7 +65,7 @@ var AuthController = {
 					req.session.user = user.toMinJSON();
 					return res.json(req.session.user);
 				} else {
-					return res.badRequest();
+					return res.forbidden();
 				}
 			});
 		} else {
