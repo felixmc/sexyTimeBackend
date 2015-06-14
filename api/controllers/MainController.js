@@ -32,6 +32,7 @@ var MainController = {
 		console.log('query: ', req.query);
 		if (req.session.user) {
 			if (req.method === 'GET') {
+				console.log('skip? ', req.query.skip || 0);
 				User.findPhotoToRate(req.session.user.id, req.query.skip || 0, function(err, photo) {
 					if (err) {
 						sails.log.error(err);
