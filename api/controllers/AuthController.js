@@ -46,17 +46,20 @@ var AuthController = {
 	signup: function(req, res) {
 		var userData = req.body;
 
-		User.create(userData)
-			.exec(function(err, user) {
-				if (err) {
-					return res.serverError(err);
-				} else if (user) {
-					req.session.user = user.toMinJSON();
-					return res.json(user.toJSON(true));
-				} else {
-					return res.badRequest();
-				}
-			});
+		if (userData.gender && userData.gender_preference)
+			User.create(userData)
+				.exec(function(err, user) {
+					if (err) {
+						return res.serverError(err);
+					} else if (user) {
+						req.session.user = user.toMinJSON();
+						return res.json(user.toJSON(true));
+					} else {
+						return res.badRequest();
+					}
+				});
+		else
+			return res.badRequest();
 	},
 	login: function(req, res) {
 		var data = req.body || {};
